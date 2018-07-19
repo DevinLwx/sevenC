@@ -33,6 +33,8 @@
     }
   ];
   import grid from '../../grid.vue'
+  import { getAdminList, addUser, updateUser, deleteUser } from '../../../api/home';
+
   export default {
     name: 'adminList',
     data () {
@@ -45,7 +47,9 @@
           password:"",
         },
         editAdminObj:null,  //用于存放正在编辑的用户
-        pageInfo:{}
+        pageInfo:{},
+        page: 1,
+        rows: 10
       }
     },
     mounted:function(){
@@ -53,14 +57,15 @@
     },
     methods:{
       getAdminList(page){
-        var _this = this;
+        let _this = this;
 
-        this.$reqs.post('/users/adminList',{
-          page:page
+        getAdminList({
+          page:page,
+          rows: this.rows
         }).then(function(result){
           //成功
           _this.listData = result.data.data;
-          _this.pageInfo.allpage = Math.ceil( result.data.total/5 );
+          _this.pageInfo.allpage = Math.ceil( result.data.total/_this.rows );
         }).catch(function (error) {
           //失败
           console.log(error)
@@ -71,8 +76,7 @@
           alert("不能为空");
           return false;
         }
-        this.$reqs.post('/users/add',this.Admin)
-          .then((result)=>{
+        addUser(this.Admin).then((result)=>{
             //成功
             this.getAdminList();
             this.emptyAdmin();
@@ -91,8 +95,8 @@
           alert("不能为空");
           return false;
         }
-        this.$reqs.post('/users/update', this.Admin)
-          .then((result)=>{
+
+        updateUser(this.Admin).then((result)=>{
             //成功
             this.gopage(this.pageInfo.current);
 
@@ -113,7 +117,7 @@
         this.Admin.password = "";
       },
       deleteAdmin(item){
-        this.$reqs.post('/users/delete',item)
+        deleteUser(item)
           .then((result)=>{
             //成功
             this.gopage(this.pageInfo.current);

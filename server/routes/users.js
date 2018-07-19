@@ -21,6 +21,7 @@ router.post('/login', function(req, res, next) {
 
             res.end('{"success":"true"}');
         }
+        console.log(req.session)
     });
 });
 
@@ -38,6 +39,15 @@ router.post('/adminList', function (req, res, next) {
     var rows = req.body.rows || 10;
 
     handler(req, res, "user", [{}, {limit: rows, skip:(page-1)*rows}], function (data, count) {
+        if(data.length > 0) {
+            for(idx in data){
+                data[idx].id = data[idx]._id;
+                delete data[idx].password;
+                delete data[idx]._id;
+            }
+        }
+        console.log(data);
+
         var obj = {
             data: data,
             total: count,
@@ -45,7 +55,11 @@ router.post('/adminList', function (req, res, next) {
         };
 
         var str = JSON.stringify(obj);
-        res.end(str);
+
+        setTimeout(function () {
+            res.end(str);
+        }, 2000)
+
     });
 });
 
@@ -82,7 +96,7 @@ router.post('/delete', function (req, res, next) {
 //更新管理员
 router.post('/update', function(req, res, next) {
     var selectors = [
-        {"_id":ObjectId(req.body._id)},
+        {"_id":ObjectId(req.body.id)},
         {"$set":{
             name:req.body.name, //用户名称
             phone:req.body.phone //联系电话
@@ -106,6 +120,7 @@ router.get('/getInfo', function (req, res, next) {
     var selectors = {"name": req.session.username};
 
     handler(req, res, "user", selectors, function(data){
+        console.log(req.session)
         var obj = {};
         if(data.length > 0) {
             obj = {

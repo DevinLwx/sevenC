@@ -1,5 +1,5 @@
 <template>
-  <div class="backlogin">
+  <div class="login-index">
     <div class="login_box">
       <div class="title">后台登录</div>
       <div>
@@ -20,8 +20,10 @@
 
 <script>
   import {mapActions} from 'vuex'
+  import { Login} from '../../api/login';
+
   export default {
-    name: 'backlogin',
+    name: 'login',
     data () {
       return {
         username:"admin",/*TODO:先预存测试值，以免手动输入*/
@@ -40,13 +42,14 @@
         this.loginText = "登录中...";
 
         //this.$reqs就访问到了main.js中绑定的axios
-        this.$reqs.post("/users/login", {
+        let data = {
           username: this.username,
           password: this.password
-        }).then(function(result){
+        }
+        Login(data).then(function(result){
           //成功
           if(result.data.success)
-              _this.$router.push({path:'/backIndex/indexContent'});
+              _this.$router.push({path:'/home/indexContent'});
           else
               alert(result.data.err);
 
@@ -58,6 +61,24 @@
           _this.disablebtn = false;
           _this.loginText = "登录"
         });
+        // this.$reqs.post("/users/login", {
+        //   username: this.username,
+        //   password: this.password
+        // }).then(function(result){
+        //   //成功
+        //   if(result.data.success)
+        //       _this.$router.push({path:'/home/indexContent'});
+        //   else
+        //       alert(result.data.err);
+        //
+        //   _this.disablebtn = false;
+        //   _this.loginText = "登录";
+        //
+        // }).catch(function (error) {
+        //   //失败
+        //   _this.disablebtn = false;
+        //   _this.loginText = "登录"
+        // });
       }
     }
   }

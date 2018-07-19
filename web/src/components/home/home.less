@@ -18,6 +18,11 @@ ul, li{
   bottom: 0;
   background: #fff;
   z-index: 99;
+  .side-outer {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
 }
 .sidenav_box .logo{
   width: 46px;
@@ -25,33 +30,59 @@ ul, li{
 }
 .sidenav{
   margin-top: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+/* for Chrome */
+.sidenav::-webkit-scrollbar {
+  display: none;
 }
 .sidenav li{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  &:last-of-type {
+    padding-bottom: 80px;
+  }
 }
 .sidenav a{
   display: block;
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   margin: 0 auto;
   position: relative;
   cursor: pointer;
   opacity: 0.6;
   transition:all 0.5s ease;
   text-decoration: none;
+  p {
+    font-size: 80%;
+    position: absolute;
+    margin-top: -20px;
+    left: 0;
+    right: 0;
+    color: #566a80;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+  }
 }
 .sidenav a i{
   font-size: 20px;
-  line-height: 56px;
+  line-height: 40px;
   text-align: center;
   display: block;
   color: #566a80;
+  padding-bottom: 12px;
 }
 .sidenav a:hover{
   background: #f0f2f5;
   opacity: 1;
 }
 .sidenav a span{
+  //position: absolute;
+  //margin-top: -40px;
+  //left: 55px;
   position: absolute;
   left: 55px;
   top: 22px;
@@ -139,6 +170,7 @@ ul, li{
   opacity: 0;
   overflow: hidden;
   text-align: center;
+  z-index: 9;
 }
 .handler .more .showul{
   height: auto;
@@ -163,7 +195,7 @@ ul, li{
 }
 
 .content{
-  margin: 20px 30px 0px 100px;
+  margin: 20px 20px 0px 100px;
   min-height: 300px;
   min-width: 700px;
 }

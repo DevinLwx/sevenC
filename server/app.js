@@ -4,18 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+var prizeRouter = require('./routes/prize');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
 //跨域  后期删
 app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8090"); //为了跨域保持session，所以指定地址，不能用*
+    res.header("Access-Control-Allow-Origin", "http://localhost:9000"); //为了跨域保持session，所以指定地址，不能用*
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Credentials', true);
+    res.cookie('tokenId', 111, {
+        httpOnly: true,
+        maxAge: 2*60*60*1000
+    })
     next();
 });
 
@@ -50,7 +54,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/prize', prizeRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

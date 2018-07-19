@@ -1,5 +1,5 @@
 <template>
-  <div class="backlogin">
+  <div class="back-index">
     <div class="header">
       <div class="search_box" :class="{search_box_fouce:search_box_fouce}">
         <i class="icon-search"></i>
@@ -20,38 +20,49 @@
     <!--侧面导航-->
     <div class="sidenav_box">
       <img class="logo" src="../../assets/images/logo03.png" alt=""/>
-      <ul class="sidenav">
-        <li class="now">
-          <router-link to="/backIndex/indexContent">
-            <i class="icon-home"></i>
-            <span>网站首页</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/backIndex/adminList">
-            <i class="icon-user"></i>
-            <span>后台人员</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/backIndex/studentList">
-            <i class=" icon-user-md"></i>
-            <span>学员管理</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/backIndex/courseList">
-            <i class="icon-book"></i>
-            <span>课程管理</span>
-          </router-link>
-        </li>
-      </ul>
+      <div class="side-outer">
+        <ul class="sidenav">
+          <li class="now">
+              <Tooltip content="期号管理" placement="right" :transfer=true>
+                <router-link to="/home/indexContent">
+                  <i class="icon-home"></i>
+                  <p>网站首页</p>
+                </router-link>
+              </Tooltip>
+          </li>
+          <li>
+            <Tooltip content="后台人员" placement="right" :transfer=true>
+              <router-link to="/home/adminList">
+                <i class="icon-user"></i>
+                <p>后台人员</p>
+              </router-link>
+            </Tooltip>
+          </li>
+          <li>
+            <Tooltip content="学员管理" placement="right" :transfer=true>
+              <router-link to="/home/studentList">
+                <i class="icon-user-md"></i>
+                <p>学员管理</p>
+              </router-link>
+            </Tooltip>
+          </li>
+          <li>
+            <Tooltip content="课程管理" placement="right" :transfer=true>
+              <router-link to="/home/courseList">
+                <i class="icon-book"></i>
+                <p>课程管理</p>
+              </router-link>
+            </Tooltip>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
     <div class="content">
 
       <ul class="breadcrumb">
-        <li><a href="#/backIndex/">首页</a></li>
+        <li><a href="#/home/">首页</a></li>
         <li>{{pageTitle}}</li>
       </ul>
       <router-view></router-view>
@@ -62,16 +73,16 @@
 </template>
 
 <script>
-  var pageTitleObj = {
+  let pageTitleObj = {
     indexContent: "网站首页",
     adminList: "后台人员",
     studentList: "学员管理",
     courseList: "课程管理",
     courseEdit: "课程编辑"
   };
+  import { Logout, getUserInfo } from '../../api/home';
 
   export default {
-    name: 'backlogin',
     data () {
       return {
         search_box_fouce: false,
@@ -92,7 +103,7 @@
       logout(){ //退出系统
         var _this = this;
 
-        this.$reqs.post("/users/logout", {}).then(function (result) {
+        Logout().then(function (result) {
           //成功
           _this.$router.push({path: '/login'});
         }).catch(function (error) {
@@ -101,11 +112,7 @@
         });
       },
       getUserInfo(){
-        console.log(11)
-        var _this = this;
-
-        this.$reqs.get("/users/getInfo", {}).then(function (result) {
-          console.log(result)
+        getUserInfo().then(function (res) {
         }).catch(function (error) {
           //失败
           console.log(error)
@@ -128,5 +135,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-  @import './backIndex';
+  @import './home';
 </style>
