@@ -45,3 +45,152 @@ ul,li{
 .myinput:focus{
   border: 1px solid #4289dc;
 }
+
+.small {
+  font-size: 85%;
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+//超出显示省略号
+.over-ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+//超出3行显示省略号
+.over-ellipsis-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+//超出不显示省略号
+.over-hidden {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+//自动填充剩余宽度
+.display-table {
+  display: table;
+  width: 100%;
+  .display-table-known {
+    display: table-cell;
+    white-space: nowrap;
+    width: 20px;
+    vertical-align: top;
+  }
+  .display-table-remaining {
+    display: table-cell;
+    width: 100%;
+    min-width: auto;
+  }
+}
+//新建流式布局  10为最大的
+.layout-row {
+  zoom: 1;
+  &:after{
+    display: block;
+    clear: both;
+    content: "";
+    height: 0;
+    visibility: hidden;
+  }
+  .lay-1,.lay-2,.lay-3,.lay-4,.lay-5,.lay-6,.lay-7,.lay-8,.lay-9,.lay-10{
+    float: left;
+  }
+  .lay-1 {
+    width: 10%;
+  }
+  .lay-2 {
+    width: 20%;
+  }
+  .lay-3 {
+    width: 30%;
+  }
+  .lay-4 {
+    width: 40%;
+  }
+  .lay-5 {
+    width: 50%;
+  }
+  .lay-6 {
+    width: 60%;
+  }
+  .lay-7 {
+    width: 70%;
+  }
+  .lay-8 {
+    width: 80%;
+  }
+  .lay-9 {
+    width: 90%;
+  }
+  .lay-10 {
+    width: 100%;
+  }
+}
+// 并排div同高
+.same-height {
+  overflow: hidden;
+  > div {
+    height:auto;
+    margin-bottom:-10000px;
+    padding-bottom:10000px;
+  }
+}
+/*清除浮动*/
+.clear-float {
+  zoom: 1;
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+    height: 0;
+    visibility: hidden;
+  }
+}
+.color-blue {
+  color: #538EF0;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.p-l-15 {
+  padding-left: 1.5rem;
+}
+.p-l-20 {
+  padding-left: 2rem;
+}
+.p-t-15 {
+  padding-top: 1.5rem;
+}
+.p-t-8 {
+  padding-top: .8rem;
+}
+.p-t-0 {
+  padding-top: 0 !important;
+}
+.p-r-15 {
+  padding-right: 1.5rem;
+}
+.p-b-15 {
+  padding-bottom: 1.5rem;
+}
+//遮罩
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 98;
+  background-color: #000;
+  opacity: .2;
+}

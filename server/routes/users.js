@@ -21,7 +21,6 @@ router.post('/login', function(req, res, next) {
 
             res.end('{"success":"true"}');
         }
-        console.log(req.session)
     });
 });
 
@@ -46,7 +45,6 @@ router.post('/adminList', function (req, res, next) {
                 delete data[idx]._id;
             }
         }
-        console.log(data);
 
         var obj = {
             data: data,
@@ -56,10 +54,7 @@ router.post('/adminList', function (req, res, next) {
 
         var str = JSON.stringify(obj);
 
-        setTimeout(function () {
-            res.end(str);
-        }, 2000)
-
+        res.end(str);
     });
 });
 
@@ -80,7 +75,6 @@ router.post('/add', function (req, res, next) {
 //删除管理员
 router.post('/delete', function (req, res, next) {
     handler(req, res, "user", {"_id": ObjectId(req.body._id)}, function (data) {
-        console.log('delete', data);
         if(data.length==0){
             res.end('{"err":"抱歉，删除失败"}');
         }else{
@@ -120,7 +114,6 @@ router.get('/getInfo', function (req, res, next) {
     var selectors = {"name": req.session.username};
 
     handler(req, res, "user", selectors, function(data){
-        console.log(req.session)
         var obj = {};
         if(data.length > 0) {
             obj = {

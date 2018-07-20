@@ -63,4 +63,14 @@ export function deleteUser(data) {
   });
 }
 
+// 期号列表
+export function getPrizeList(data) {
+  let url = urls.prize.list;
+
+  return winVue.$reqs({
+    url: url,
+    method: 'post',
+    data: data
+  });
+}
 

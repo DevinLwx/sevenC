@@ -43,7 +43,7 @@ var deletes = function(db,collections,selector,fn){
 var find = function(db,collections,selector,fn){
     //collections="hashtable";
     var collection = db.collection(collections);
-console.log(111)
+
     collection.find(selector).toArray(function(err,result){
         //console.log(docs);
         try{

@@ -7,6 +7,10 @@ const urls = {
     addUser: '/users/add',
     updateUser: '/users/update',
     deleteUser: '/users/delete',
+  },
+  prize: {
+    list: '/prizes/prizeList'
+
   }
 }
 

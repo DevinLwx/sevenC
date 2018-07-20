@@ -26,7 +26,7 @@
               <Tooltip content="期号管理" placement="right" :transfer=true>
                 <router-link to="/home/indexContent">
                   <i class="icon-home"></i>
-                  <p>网站首页</p>
+                  <p>期号管理</p>
                 </router-link>
               </Tooltip>
           </li>
@@ -74,7 +74,7 @@
 
 <script>
   let pageTitleObj = {
-    indexContent: "网站首页",
+    indexContent: "期号管理",
     adminList: "后台人员",
     studentList: "学员管理",
     courseList: "课程管理",
@@ -87,7 +87,7 @@
       return {
         search_box_fouce: false,
         showExit: false,
-        pageTitle: pageTitleObj[this.$route.path.substr(this.$route.path.lastIndexOf("/") + 1)] || "网站首页"
+        pageTitle: pageTitleObj[this.$route.path.substr(this.$route.path.lastIndexOf("/") + 1)] || "期号管理"
       }
     },
     methods: {
@@ -123,7 +123,7 @@
       $route: {
         handler: function (val, oldVal) {
           var path = val.path;
-          this.pageTitle = pageTitleObj[path.substr(path.lastIndexOf("/") + 1)] || "网站首页";
+          this.pageTitle = pageTitleObj[path.substr(path.lastIndexOf("/") + 1)] || "期号管理";
         }
       }
     },

@@ -12,4 +12,5 @@ export default {
 
 <style lang="less">
   @import './styles/common';
+  @import './styles/reset';
 </style>
