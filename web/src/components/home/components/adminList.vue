@@ -117,15 +117,27 @@
         this.Admin.password = "";
       },
       deleteAdmin(item){
-        deleteUser(item)
-          .then((result)=>{
-            //成功
-            this.gopage(this.pageInfo.current);
-            this.emptyAdmin();
-          }).catch(function (error) {
-          //失败
-          console.log(error)
+        let _this = this;
+        this.$Modal.confirm({
+          title: "请确认",
+          content: "确定要删除么？",
+          onOk: () => {
+            deleteUser(item).then((result)=>{
+                if(result.data.success) {
+                  this.$Message.success("删除成功");
+                  //成功
+                  this.gopage(_this.pageInfo.current);
+                  this.emptyAdmin();
+                } else {
+                  this.$Message.error("删除失败");
+                }
+              }).catch(function (error) {
+              //失败
+              console.log(error)
+            });
+          }
         });
+
       },
       gopage(index){
         this.pageInfo.current = index;

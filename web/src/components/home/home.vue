@@ -13,7 +13,7 @@
             <li><a href="javascript:;">意见反馈</a></li>
           </ul>
         </div>
-        <img src="../../assets/images/teacherimg01.png" alt=""/>
+        <img src="../../assets/images/header.png" alt=""/>
       </div>
     </div>
 

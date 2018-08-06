@@ -74,7 +74,7 @@ router.post('/add', function (req, res, next) {
 
 //删除管理员
 router.post('/delete', function (req, res, next) {
-    handler(req, res, "user", {"_id": ObjectId(req.body._id)}, function (data) {
+    handler(req, res, "user", {"_id": ObjectId(req.body.id)}, function (data) {
         if(data.length==0){
             res.end('{"err":"抱歉，删除失败"}');
         }else{

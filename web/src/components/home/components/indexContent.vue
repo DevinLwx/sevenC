@@ -1,6 +1,6 @@
 <template>
   <div class="indexContent main">
-    <Button @click="handleClearCurrentRow">清楚选择</Button>
+    <Button @click="handleClearCurrentRow">清除选择</Button>
     <div class="p-t-8">
       <Table ref="currentRowTable" highlight-row :columns="columns" :data="data" :border="true"
              @on-current-change="selectTable"></Table>
@@ -181,7 +181,7 @@
     methods:{
       getPrizeList() {
         getPrizeList().then((res) => {
-          console.log(res)
+          console.log(res.data)
           if(res.data.success) {
             this.data = res.data.data;
           }
