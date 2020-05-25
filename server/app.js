@@ -16,6 +16,7 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Credentials', true);
+    res.setHeader('Content-Type', 'text/palin; charset=utf-8');
     res.cookie('tokenId', 111, {
         httpOnly: true,
         maxAge: 2*60*60*1000
